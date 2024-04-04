@@ -6,7 +6,13 @@ import repeatStringNTimes from "./ex5";
 import reverseString from "./ex6";
 import checkSymetricalString from "./ex7";
 import checkAllCaseUp from "./ex8";
-import { CalDivisors, CalSmallerPrimesSum, CalSumBetweens, RearrangeMinNum } from "./number";
+import {
+  CalDivisors,
+  CalSmallerPrimesSum,
+  CalSumBetweens,
+  CheckPrime,
+  RearrangeMinNum,
+} from "./number";
 
 test("ex1 true case", () => {
   expect(checkStringExist("Amela A Beta", "Beta")).toBe(true);
@@ -56,10 +62,15 @@ test("Number ex2", () => {
   expect(CalSumBetweens(3, 8)).toBe(22);
 });
 
+test("Number ex3", () => {
+  expect(CheckPrime(137)).toBe(true);
+});
+
 test("Number ex5", () => {
   expect(CalDivisors(8)).toBe(1 + 2 + 4 + 8);
 });
 
 test("Number ex6", () => {
   expect(RearrangeMinNum(53751)).toBe(13557);
+  expect(RearrangeMinNum(60421)).toBe(10246);
 });
