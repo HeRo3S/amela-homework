@@ -1,18 +1,11 @@
-import checkStringExist from "./ex1";
-import shortenString from "./ex2";
-import x10String from "./ex3";
-import repeatString from "./ex4";
-import repeatStringNTimes from "./ex5";
-import reverseString from "./ex6";
-import checkSymetricalString from "./ex7";
-import checkAllCaseUp from "./ex8";
 import {
   CalDivisors,
-  CalSmallerPrimesSum,
+  // CalSmallerPrimesSum,
   CalSumBetweens,
   CheckPrime,
   RearrangeMinNum,
 } from "./number";
+import { checkAllCaseUp, checkStringExist, checkSymetricalString, repeatString, repeatStringNTimes, reverseString, shortenString, x10String } from "./string";
 
 test("ex1 true case", () => {
   expect(checkStringExist("Amela A Beta", "Beta")).toBe(true);
