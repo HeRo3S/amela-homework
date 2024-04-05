@@ -1,31 +1,22 @@
 export function FindMinNumbers(arr: number[]): number {
-  let swap = 0;
-  for (let i = 0; i < arr.length - 1; i++) {
-    for (let j = 0; j < arr.length - 1 - i; j++) {
-      if (arr[j] > arr[j + 1]) {
-        swap = arr[j];
-        arr[j] = arr[j + 1];
-        arr[j + 1] = swap;
-      }
-    }
+  let min = arr[0];
+  for (let i = 1; i < arr.len; i++) {
+    if (arr[i] < min) min = arr[i];
   }
-  return arr[0];
+  return min;
 }
 
 export function Find2ndMaxNumbers(arr: number[]): number {
-  let swap = 0;
-  for (let i = 0; i < arr.length - 1; i++) {
-    for (let j = 0; j < arr.length - 1 - i; j++) {
-      if (arr[j] > arr[j + 1]) {
-        swap = arr[j];
-        arr[j] = arr[j + 1];
-        arr[j + 1] = swap;
-      }
+  let max1 = arr[0];
+  let max2 = arr[1];
+  for (let i = 0; i < arr.len; i++) {
+    if (arr[i] > max1) {
+      max1 = arr[i];
+    } else if (arr[i] > max2) {
+      max2 = arr[i];
     }
   }
-
-  const nonDupArr = [...new Set(arr)];
-  return nonDupArr[nonDupArr.length - 2];
+  return max2;
 }
 
 export function ReverseAlphabeticalOrderArray(arr: string[]): string[] {
@@ -45,7 +36,7 @@ export function ReverseAlphabeticalOrderArray(arr: string[]): string[] {
 
 export function Count5Divider(): number {
   let sum = 0;
-  for (let i = 0; i <= 100 / 5; i++) {
+  for (let i = 0; i <= 100; i += 5) {
     sum += i;
   }
   return sum;
@@ -66,12 +57,12 @@ export function LargestElementsLength(arr: string[]): string[] {
 }
 
 export function Randomizer(arr: unknown[]): unknown {
-  return arr[Math.random() * arr.length];
+  return arr[Math.ceil(Math.random() * arr.length)];
 }
 
 export function RandomizeSwap(arr: unknown[]): unknown[] {
-  const a = Math.random() * arr.length;
-  const b = Math.random() * arr.length;
+  const a = Math.floor(Math.random() * arr.length);
+  const b = Math.floor(Math.random() * arr.length);
   const swap = arr[a];
   arr[a] = arr[b];
   arr[b] = swap;
