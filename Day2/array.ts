@@ -1,6 +1,6 @@
 export function FindMinNumbers(arr: number[]): number {
   let min = arr[0];
-  for (let i = 1; i < arr.len; i++) {
+  for (let i = 1; i < arr.length; i++) {
     if (arr[i] < min) min = arr[i];
   }
   return min;
@@ -9,11 +9,10 @@ export function FindMinNumbers(arr: number[]): number {
 export function Find2ndMaxNumbers(arr: number[]): number {
   let max1 = arr[0];
   let max2 = arr[1];
-  for (let i = 0; i < arr.len; i++) {
+  for (let i = 1; i < arr.length; i++) {
     if (arr[i] > max1) {
+      max2 = max1;
       max1 = arr[i];
-    } else if (arr[i] > max2) {
-      max2 = arr[i];
     }
   }
   return max2;
