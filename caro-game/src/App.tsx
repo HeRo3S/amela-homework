@@ -118,12 +118,12 @@ export default function App() {
         continue;
       for (let j = 0; j < winCondition; j++) {
         if (
-          checkingYCoordinate - i + j >= numberOfTiles ||
-          checkingXCoordinate + i + j < 0
+          checkingYCoordinate - i - j < 0 ||
+          checkingXCoordinate + i + j >= numberOfTiles
         )
           break;
         if (
-          boardState[checkingYCoordinate - i + j][
+          boardState[checkingYCoordinate - i - j][
             checkingXCoordinate + i + j
           ] !== player
         )
@@ -140,7 +140,6 @@ export default function App() {
     lastMoveYCoordinate: number,
     lastMoveXCoordinate: number,
   ): boolean {
-    // return CheckWin(player, lastMoveYCoordinate, lastMoveXCoordinate, 3, []);
     return CheckWin(player, lastMoveYCoordinate, lastMoveXCoordinate, 3);
   }
 
