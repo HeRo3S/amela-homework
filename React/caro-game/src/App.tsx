@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 
 export default function App() {
   const [numberOfTiles, setNumberOfTiles] = useState(3);

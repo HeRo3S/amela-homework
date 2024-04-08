@@ -127,7 +127,7 @@ export function ResetData(data: IData) {
   data.name = "";
   data.age = 0;
   data.isStatus = false;
-  data.a.a.forEach((e) => (e = 0));
+  data.a.a.forEach(() => 0);
   data.a.b.c = 0;
-  data.c.forEach((e) => (e = ""));
+  data.c.forEach(() => 0);
 }
