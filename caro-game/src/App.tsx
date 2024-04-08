@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 
 export default function App() {
   const [numberOfTiles, setNumberOfTiles] = useState(3);
@@ -63,90 +64,84 @@ export default function App() {
     checkingYCoordinate: number,
     checkingXCoordinate: number,
     winCondition: number,
-    stackList: number[][],
-  ): boolean {
-    // NOTE: base case
-    if (checkingXCoordinate >= numberOfTiles || checkingXCoordinate < 0)
-      return false;
-    if (checkingYCoordinate >= numberOfTiles || checkingYCoordinate < 0)
-      return false;
-    if (boardState[checkingYCoordinate][checkingXCoordinate] !== player)
-      return false;
-    for (let i = 0; i < stackList.length; i++) {
-      if (
-        stackList[i][0] === checkingYCoordinate &&
-        stackList[i][1] === checkingXCoordinate
-      )
-        return false;
+  ) {
+    // check row
+    for (
+      let i = checkingXCoordinate - winCondition + 1;
+      i <= checkingXCoordinate;
+      i++
+    ) {
+      if (i < 0) continue;
+      for (let j = 0; j < winCondition; j++) {
+        if (i + j >= numberOfTiles) break;
+        if (boardState[checkingYCoordinate][i + j] !== player) break;
+        if (j === winCondition - 1) return true;
+      }
     }
-
-    stackList.push([checkingYCoordinate, checkingXCoordinate]);
-    if (stackList.length === winCondition) return true;
-    return (
-      CheckWin(
-        player,
-        checkingYCoordinate,
-        checkingXCoordinate + 1,
-        winCondition,
-        stackList,
-      ) ||
-      CheckWin(
-        player,
-        checkingYCoordinate + 1,
-        checkingXCoordinate,
-        winCondition,
-        stackList,
-      ) ||
-      CheckWin(
-        player,
-        checkingYCoordinate + 1,
-        checkingXCoordinate + 1,
-        winCondition,
-        stackList,
-      ) ||
-      CheckWin(
-        player,
-        checkingYCoordinate,
-        checkingXCoordinate - 1,
-        winCondition,
-        stackList,
-      ) ||
-      CheckWin(
-        player,
-        checkingYCoordinate - 1,
-        checkingXCoordinate,
-        winCondition,
-        stackList,
-      ) ||
-      CheckWin(
-        player,
-        checkingYCoordinate - 1,
-        checkingXCoordinate - 1,
-        winCondition,
-        stackList,
-      ) ||
-      CheckWin(
-        player,
-        checkingYCoordinate + 1,
-        checkingXCoordinate - 1,
-        winCondition,
-        stackList,
-      ) ||
-      CheckWin(
-        player,
-        checkingYCoordinate - 1,
-        checkingXCoordinate + 1,
-        winCondition,
-        stackList,
+    // check col
+    for (
+      let i = checkingYCoordinate - winCondition + 1;
+      i <= checkingYCoordinate;
+      i++
+    ) {
+      if (i < 0) continue;
+      for (let j = 0; j < winCondition; j++) {
+        if (i + j >= numberOfTiles) break;
+        if (boardState[i + j][checkingXCoordinate] !== player) break;
+        if (j === winCondition - 1) return true;
+      }
+    }
+    // check diag
+    for (let i = -winCondition + 1; i <= 0; i++) {
+      if (checkingYCoordinate + i < 0 || checkingXCoordinate + i < 0) continue;
+      for (let j = 0; j < winCondition; j++) {
+        if (
+          checkingYCoordinate + i + j >= numberOfTiles ||
+          checkingXCoordinate + i + j >= numberOfTiles
+        )
+          break;
+        if (
+          boardState[checkingYCoordinate + i + j][
+            checkingXCoordinate + i + j
+          ] !== player
+        )
+          break;
+        if (j === winCondition - 1) return true;
+      }
+    }
+    // check anti-diag
+    for (let i = -winCondition + 1; i <= 0; i++) {
+      if (
+        checkingYCoordinate - i >= numberOfTiles ||
+        checkingXCoordinate + i < 0
       )
-    );
+        continue;
+      for (let j = 0; j < winCondition; j++) {
+        if (
+          checkingYCoordinate - i + j >= numberOfTiles ||
+          checkingXCoordinate + i + j < 0
+        )
+          break;
+        if (
+          boardState[checkingYCoordinate - i + j][
+            checkingXCoordinate + i + j
+          ] !== player
+        )
+          break;
+        if (j === winCondition - 1) return true;
+      }
+    }
+    //if run through all case
+    return false;
   }
+
   function HasPlayerWon(
     player: number,
     lastMoveYCoordinate: number,
     lastMoveXCoordinate: number,
   ): boolean {
-    return CheckWin(player, lastMoveYCoordinate, lastMoveXCoordinate, 3, []);
+    // return CheckWin(player, lastMoveYCoordinate, lastMoveXCoordinate, 3, []);
+    return CheckWin(player, lastMoveYCoordinate, lastMoveXCoordinate, 3);
   }
 
   if (whoWon !== -1) {
