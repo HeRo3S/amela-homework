@@ -1,8 +1,6 @@
-import { Box, Card, Grid, Typography, styled } from "@mui/material";
+import { Box, Card, Grid, Rating, Typography, styled } from "@mui/material";
 import TimerOutlinedIcon from "@mui/icons-material/TimerOutlined";
 import ScoreOutlinedIcon from "@mui/icons-material/ScoreOutlined";
-import StarOutlinedIcon from "@mui/icons-material/StarOutlined";
-import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
 
 const StyledCard = styled(Card)({
   width: "400px",
@@ -22,26 +20,22 @@ export default function SubjectCard() {
     <StyledCard>
       <StyledGridContainer container>
         <Grid item xs={12}>
-          <Typography variant="h5">
-            Kiểm tra an toàn bảo mật thông tin
+          <Typography variant="h6">
+            Kiểm tra an toàn bảo mật thông tin 2
           </Typography>
         </Grid>
         <Grid item xs={12} container>
           <Grid item xs={4} sx={{ display: "flex", alignItems: "center" }}>
             <TimerOutlinedIcon />
-            <Typography variant="h6">7 phút</Typography>
+            <Typography variant="body1">7 phút</Typography>
           </Grid>
           <Grid item xs={8} sx={{ display: "flex", alignItems: "center" }}>
             <ScoreOutlinedIcon />
-            <Typography variant="h6">200/250 điểm</Typography>
+            <Typography variant="body1">200/250 điểm</Typography>
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          <StarOutlinedIcon fontSize="large" />
-          <StarOutlinedIcon fontSize="large" />
-          <StarOutlinedIcon fontSize="large" />
-          <StarOutlinedIcon fontSize="large" />
-          <StarOutlineOutlinedIcon fontSize="large" />
+          <Rating defaultValue={4} precision={0.5} />
         </Grid>
       </StyledGridContainer>
     </StyledCard>

@@ -69,28 +69,15 @@ const LogoutButton = styled(Button)({
   border: "solid 1px",
 });
 
-interface IDashboardDrawer {
+interface IExamDrawer {
   width: string;
   isMobileOpen: boolean;
   onCloseMobile: () => void;
 }
-export default function DashboardDrawer(props: IDashboardDrawer) {
+export default function ExamDrawer(props: IExamDrawer) {
   const { width, isMobileOpen, onCloseMobile } = props;
   return (
     <>
-      <StyledPcDrawer
-        variant="persistent"
-        anchor="left"
-        open={true}
-        width={width}
-      >
-        <StyledAvatar src={avatarDB}></StyledAvatar>
-        <StyledUserInfoContainer>
-          <Typography variant="h5">User: thanhnh@gmai...</Typography>
-          <Typography variant="h5">Point: 2468</Typography>
-        </StyledUserInfoContainer>
-        <LogoutButton>LOGOUT</LogoutButton>
-      </StyledPcDrawer>
       <StyledMobileDrawer
         variant="temporary"
         anchor="left"
