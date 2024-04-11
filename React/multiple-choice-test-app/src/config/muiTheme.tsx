@@ -3,6 +3,12 @@ import { createTheme } from "@mui/material";
 const theme = createTheme({
   typography: {
     fontFamily: "Inter",
+    h4: {
+      fontWeight: 700,
+    },
+    h5: {
+      fontWeight: 700,
+    },
     h6: {
       fontFamily: "Inter",
       fontWeight: 700,

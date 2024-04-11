@@ -7,14 +7,24 @@ import {
   Button,
   Grid,
   Link,
+  MenuItem,
   Pagination,
+  Paper,
+  Select,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
   Typography,
   styled,
 } from "@mui/material";
 import DummyToolbar from "../components/common/DummyToolbar";
 import { ManagerSearchBar } from "../components/manager/ManagerSearchBar";
-import AccountInfoCard from "../components/manager/AccountInfoCard";
-import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
+import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const LocalCSSProperties = {
   drawerWidth: "289px",
@@ -44,8 +54,12 @@ const StyledContentContainer = styled(Box)(({ theme }) => ({
 }));
 
 const StyledPageTitleContainer = styled(Box)(({ theme }) => ({
-  display: "flex",
+  display: "grid",
+  flexDirection: "column",
+  alignContent: "center",
+  gridTemplateRows: "1fr 1fr",
   alignItems: "center",
+
   [theme.breakpoints.down("md")]: {
     display: "none",
   },
@@ -59,6 +73,7 @@ const StyledNewUserButton = styled(Button)(({ theme }) => ({
   justifyContent: "center",
   border: "solid 1px",
   borderRadius: "4px",
+  backgroundColor: "#ffffff",
 
   "& *": {
     flexGrow: 1,
@@ -75,7 +90,18 @@ const StyledNewUserButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-export default function UserManagerPage() {
+const StyledRowsNumberSelect = styled(Select)(({ theme }) => ({
+  backgroundColor: "#9afac0",
+  position: "relative",
+  left: "10%",
+  height: "32px",
+
+  [theme.breakpoints.down("md")]: {
+    display: "none",
+  },
+}));
+
+export default function ListTopicManagerPage() {
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
 
   const onCloseMobileDrawer = () => {
@@ -88,7 +114,7 @@ export default function UserManagerPage() {
   return (
     <Box sx={{ display: "flex", flexDirection: "row" }}>
       <ManagerAppBar
-        name="User Manager"
+        name="List topic manager"
         onClickDrawerButton={onClickMobileDrawerButton}
       />
       <ManagerDrawer
@@ -100,12 +126,13 @@ export default function UserManagerPage() {
         <DummyToolbar />
         <StyledContentContainer>
           <StyledPageTitleContainer>
+            <Typography variant="h5">List topic manager</Typography>
             <Breadcrumbs separator=">" aria-label="breadcrumbs">
               <Link underline="hover" color="inherit" href="/">
-                <Typography variant="h6">Home</Typography>
+                <Typography variant="body1">Home</Typography>
               </Link>
-              <Typography color="text.primary" variant="h6">
-                User Manager
+              <Typography color="text.primary" variant="body1">
+                List topic manager
               </Typography>
             </Breadcrumbs>
           </StyledPageTitleContainer>
@@ -115,25 +142,64 @@ export default function UserManagerPage() {
             </Grid>
             <Grid item xs={1} md={2}>
               <StyledNewUserButton>
-                <AddCircleRoundedIcon
-                  fontSize="large"
-                  sx={{ color: "#00adc1" }}
-                />
-                <Typography>New User</Typography>
+                <AddIcon fontSize="large" />
+                <Typography>New topic</Typography>
               </StyledNewUserButton>
             </Grid>
           </Grid>
-          <Box display="flex" flexDirection="column">
-            <Typography variant="h6">Tổng số tài khoản: 85</Typography>
-            {Array(6).fill(<AccountInfoCard />)}
+          <Box
+            display="flex"
+            flexDirection="column"
+            sx={{ backgroundColor: "#d9d9d9", padding: "20px 20px" }}
+          >
+            <Typography variant="h6">Danh sách topic</Typography>
+            <TableContainer component={Paper} sx={{ marginTop: "20px" }}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>STT</TableCell>
+                    <TableCell>Topic name</TableCell>
+                    <TableCell>Difficult</TableCell>
+                    <TableCell>Action</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {Array(4).fill(
+                    <TableRow>
+                      <TableCell>1</TableCell>
+                      <TableCell>Toán</TableCell>
+                      <TableCell>Khó</TableCell>
+                      <TableCell>
+                        <EditIcon />
+                        <DeleteIcon />
+                      </TableCell>
+                    </TableRow>,
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Pagination
+              count={10}
+              variant="outlined"
+              shape="rounded"
+              sx={{ paddingY: "10px" }}
+            />
+            <StyledRowsNumberSelect defaultValue={8}>
+              <MenuItem value={8}>8</MenuItem>
+              <MenuItem value={10}>10</MenuItem>
+              <MenuItem value={12}>12</MenuItem>
+            </StyledRowsNumberSelect>
           </Box>
         </StyledContentContainer>
-        <Pagination
-          count={10}
-          variant="outlined"
-          shape="rounded"
-          sx={{ paddingY: "10px", alignSelf: "center" }}
-        />
       </StyledMainContainer>
     </Box>
   );

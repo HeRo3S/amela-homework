@@ -1,7 +1,9 @@
-import { AppBar, IconButton, Toolbar, styled } from "@mui/material";
+import { AppBar, IconButton, Toolbar, Typography, styled } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
+  backgroundColor: "#545151",
+  fontcolor: "#ffffff",
   [theme.breakpoints.up("md")]: {
     display: "none",
   },
@@ -11,16 +13,20 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
 }));
 
 interface IProps {
+  name: string;
   onClickDrawerButton: () => void;
 }
 export default function ManagerAppBar(prop: IProps) {
-  const { onClickDrawerButton } = prop;
+  const { name, onClickDrawerButton } = prop;
   return (
     <StyledAppBar position="fixed">
       <Toolbar>
         <IconButton onClick={onClickDrawerButton}>
-          <MenuIcon />
+          <MenuIcon fontSize="large" sx={{ backgroundColor: "#d9d9d9" }} />
         </IconButton>
+        <Typography component="div" variant="h6">
+          {name}
+        </Typography>
       </Toolbar>
     </StyledAppBar>
   );

@@ -15,6 +15,7 @@ import DummyToolbar from "../components/common/DummyToolbar";
 import { ManagerSearchBar } from "../components/manager/ManagerSearchBar";
 import AccountInfoCard from "../components/manager/AccountInfoCard";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
+import QuestionInfoCard from "../components/manager/QuestionInfoCard";
 
 const LocalCSSProperties = {
   drawerWidth: "289px",
@@ -75,7 +76,7 @@ const StyledNewUserButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-export default function UserManagerPage() {
+export default function QuestionManager() {
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
 
   const onCloseMobileDrawer = () => {
@@ -88,7 +89,7 @@ export default function UserManagerPage() {
   return (
     <Box sx={{ display: "flex", flexDirection: "row" }}>
       <ManagerAppBar
-        name="User Manager"
+        name="Question Manager"
         onClickDrawerButton={onClickMobileDrawerButton}
       />
       <ManagerDrawer
@@ -104,8 +105,11 @@ export default function UserManagerPage() {
               <Link underline="hover" color="inherit" href="/">
                 <Typography variant="h6">Home</Typography>
               </Link>
+              <Link underline="hover" color="inherit" href="/">
+                <Typography variant="h6">Question Manager</Typography>
+              </Link>
               <Typography color="text.primary" variant="h6">
-                User Manager
+                Đảm báo chất lượng phần mềm
               </Typography>
             </Breadcrumbs>
           </StyledPageTitleContainer>
@@ -119,13 +123,13 @@ export default function UserManagerPage() {
                   fontSize="large"
                   sx={{ color: "#00adc1" }}
                 />
-                <Typography>New User</Typography>
+                <Typography>New Question</Typography>
               </StyledNewUserButton>
             </Grid>
           </Grid>
           <Box display="flex" flexDirection="column">
-            <Typography variant="h6">Tổng số tài khoản: 85</Typography>
-            {Array(6).fill(<AccountInfoCard />)}
+            <Typography variant="h6">Tổng số câu hỏi: 38</Typography>
+            {Array(4).fill(<QuestionInfoCard />)}
           </Box>
         </StyledContentContainer>
         <Pagination

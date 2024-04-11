@@ -6,8 +6,17 @@ import {
   Typography,
   styled,
   DrawerProps,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
 } from "@mui/material";
 import avatarDB from "../../assets/dashboardAvt.png";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import HelpIcon from "@mui/icons-material/Help";
+import QuizIcon from "@mui/icons-material/Quiz";
+import { JsxElement } from "typescript";
+import { ReactElement } from "react";
 
 interface IStyledDrawerProps extends DrawerProps {
   width?: string;
@@ -50,14 +59,6 @@ const StyledAvatar = styled(Avatar)({
   height: "180px",
 });
 
-const StyledUserInfoContainer = styled(Box)({
-  padding: "0 5px",
-  "& h5": {
-    fontWeight: "600",
-    lineHeight: "1/5",
-  },
-});
-
 const LogoutButton = styled(Button)({
   position: "fixed",
   bottom: "20px",
@@ -74,6 +75,24 @@ interface IProps {
 }
 export default function ManagerDrawer(props: IProps) {
   const { width, isMobileOpen, onCloseMobile } = props;
+
+  function RenderActionList() {
+    const actions: { icon: ReactElement; text: string }[] = [
+      { icon: <PersonAddIcon />, text: "User Manager" },
+      { icon: <HelpIcon />, text: "Test Manager" },
+      { icon: <QuizIcon />, text: "Test Quiz" },
+    ];
+    return (
+      <List>
+        {actions.map((a) => (
+          <ListItem key={a.text}>
+            <ListItemIcon>{a.icon}</ListItemIcon>
+            <ListItemText>{a.text}</ListItemText>
+          </ListItem>
+        ))}
+      </List>
+    );
+  }
   return (
     <>
       <StyledPcDrawer
@@ -83,10 +102,7 @@ export default function ManagerDrawer(props: IProps) {
         width={width}
       >
         <StyledAvatar src={avatarDB}></StyledAvatar>
-        <StyledUserInfoContainer>
-          <Typography variant="h5">User: thanhnh@gmai...</Typography>
-          <Typography variant="h5">Point: 2468</Typography>
-        </StyledUserInfoContainer>
+        {RenderActionList()}
         <LogoutButton>LOGOUT</LogoutButton>
       </StyledPcDrawer>
       <StyledMobileDrawer
@@ -97,10 +113,7 @@ export default function ManagerDrawer(props: IProps) {
         width={width}
       >
         <StyledAvatar src={avatarDB}></StyledAvatar>
-        <StyledUserInfoContainer>
-          <Typography variant="h5">User: thanhnh@gmai...</Typography>
-          <Typography variant="h5">Point: 2468</Typography>
-        </StyledUserInfoContainer>
+        {RenderActionList()}
         <LogoutButton>LOGOUT</LogoutButton>
       </StyledMobileDrawer>
     </>

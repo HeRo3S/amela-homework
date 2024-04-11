@@ -5,16 +5,28 @@ import {
   Box,
   Breadcrumbs,
   Button,
+  Checkbox,
+  FormControlLabel,
   Grid,
   Link,
+  MenuItem,
   Pagination,
+  Paper,
+  Select,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
   Typography,
   styled,
 } from "@mui/material";
 import DummyToolbar from "../components/common/DummyToolbar";
 import { ManagerSearchBar } from "../components/manager/ManagerSearchBar";
-import AccountInfoCard from "../components/manager/AccountInfoCard";
-import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 const LocalCSSProperties = {
   drawerWidth: "289px",
@@ -32,50 +44,47 @@ const StyledMainContainer = styled(Box)(({ theme }) => ({
 
 const StyledContentContainer = styled(Box)(({ theme }) => ({
   display: "grid",
-  gridTemplateRows: "1fr 1fr 7fr",
+  gridTemplateRows: "1fr 3fr 5fr 1fr",
   flexDirection: "column",
   flex: "1",
   width: "90%",
-  maxWidth: "816px",
+  maxWidth: "1200px",
 
   [theme.breakpoints.down("md")]: {
-    gridTemplateRows: "1fr 8fr",
+    gridTemplateRows: "4fr 5fr 1fr",
   },
 }));
 
 const StyledPageTitleContainer = styled(Box)(({ theme }) => ({
-  display: "flex",
+  display: "grid",
+  flexDirection: "column",
+  alignContent: "center",
+  gridTemplateRows: "1fr 1fr",
   alignItems: "center",
+
   [theme.breakpoints.down("md")]: {
     display: "none",
   },
 }));
 
-const StyledNewUserButton = styled(Button)(({ theme }) => ({
-  width: "100%",
-  height: "73px",
-  display: "flex",
-  flexDirection: "row",
+const StyledGridCenterAll = styled(Grid)(({ theme }) => ({
+  display: "grid",
+  alignItems: "center",
   justifyContent: "center",
-  border: "solid 1px",
-  borderRadius: "4px",
+  height: "100%",
+}));
 
-  "& *": {
-    flexGrow: 1,
-  },
+const StyledRowsNumberSelect = styled(Select)(({ theme }) => ({
+  backgroundColor: "#9afac0",
+  marginLeft: "10px",
+  height: "32px",
+
   [theme.breakpoints.down("md")]: {
-    border: "none",
-    backgroundColor: "#c4c4c4",
-    "& p": {
-      display: "none",
-    },
-    "& svg": {
-      height: "100%",
-    },
+    display: "none",
   },
 }));
 
-export default function UserManagerPage() {
+export default function NewTopicCreator() {
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
 
   const onCloseMobileDrawer = () => {
@@ -88,7 +97,7 @@ export default function UserManagerPage() {
   return (
     <Box sx={{ display: "flex", flexDirection: "row" }}>
       <ManagerAppBar
-        name="User Manager"
+        name="Test manager"
         onClickDrawerButton={onClickMobileDrawerButton}
       />
       <ManagerDrawer
@@ -100,40 +109,49 @@ export default function UserManagerPage() {
         <DummyToolbar />
         <StyledContentContainer>
           <StyledPageTitleContainer>
+            <Typography variant="h5">Thêm mới test</Typography>
             <Breadcrumbs separator=">" aria-label="breadcrumbs">
               <Link underline="hover" color="inherit" href="/">
-                <Typography variant="h6">Home</Typography>
+                <Typography variant="body1">Home</Typography>
               </Link>
-              <Typography color="text.primary" variant="h6">
-                User Manager
+              <Link underline="hover" color="inherit" href="/quiz_manager">
+                <Typography variant="body1">Test quiz manager</Typography>
+              </Link>
+              <Typography color="text.primary" variant="body1">
+                new test
               </Typography>
             </Breadcrumbs>
           </StyledPageTitleContainer>
           <Grid container columns={7} columnSpacing={1}>
-            <Grid item xs={6} md={5}>
-              <ManagerSearchBar />
+            <Grid item xs={7}>
+              <Typography>Topic name: </Typography>
+              <TextField></TextField>
             </Grid>
-            <Grid item xs={1} md={2}>
-              <StyledNewUserButton>
-                <AddCircleRoundedIcon
-                  fontSize="large"
-                  sx={{ color: "#00adc1" }}
-                />
-                <Typography>New User</Typography>
-              </StyledNewUserButton>
+            <Grid item xs={6}>
+              <Typography>Description: </Typography>
+              <TextField></TextField>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography>Độ khó : </Typography>
+              <Select defaultValue={"Medium"}>
+                <MenuItem value={"Easy"}>Easy</MenuItem>
+                <MenuItem value={"Medium"}>Medium</MenuItem>
+                <MenuItem value={"Hard"}>Hard</MenuItem>
+              </Select>
             </Grid>
           </Grid>
-          <Box display="flex" flexDirection="column">
-            <Typography variant="h6">Tổng số tài khoản: 85</Typography>
-            {Array(6).fill(<AccountInfoCard />)}
+          <Grid container columns={11}></Grid>
+          <Box
+            sx={{
+              display: "flex",
+              width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Button>ADD New</Button>
           </Box>
         </StyledContentContainer>
-        <Pagination
-          count={10}
-          variant="outlined"
-          shape="rounded"
-          sx={{ paddingY: "10px", alignSelf: "center" }}
-        />
       </StyledMainContainer>
     </Box>
   );
