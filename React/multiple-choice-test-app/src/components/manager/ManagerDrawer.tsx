@@ -27,21 +27,21 @@ const StyledPcDrawer = styled(Drawer)<IStyledDrawerProps>(
     },
   }),
 );
-const StyledMobileDrawer = styled(Drawer)<IStyledDrawerProps>(
-  ({ width, theme }) => ({
-    flex: "0 0 auto",
+const StyledMobileDrawer = styled(Drawer, {
+  shouldForwardProp: (prop) => prop !== "width",
+})<IStyledDrawerProps>(({ width, theme }) => ({
+  flex: "0 0 auto",
+  width: width,
+  "& .MuiDrawer-paper": {
+    backgroundColor: "#d9d9d9",
+    display: "flex",
+    alignItems: "center",
     width: width,
-    "& .MuiDrawer-paper": {
-      backgroundColor: "#d9d9d9",
-      display: "flex",
-      alignItems: "center",
-      width: width,
-    },
-    [theme.breakpoints.down("md")]: {
-      display: "block",
-    },
-  }),
-);
+  },
+  [theme.breakpoints.down("md")]: {
+    display: "block",
+  },
+}));
 
 const StyledAvatar = styled(Avatar)({
   marginTop: "40px",
@@ -67,12 +67,12 @@ const LogoutButton = styled(Button)({
   border: "solid 1px",
 });
 
-interface IDashboardDrawer {
+interface IProps {
   width: string;
   isMobileOpen: boolean;
   onCloseMobile: () => void;
 }
-export default function DashboardDrawer(props: IDashboardDrawer) {
+export default function ManagerDrawer(props: IProps) {
   const { width, isMobileOpen, onCloseMobile } = props;
   return (
     <>
